@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            GameObject newBolt = (GameObject)Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            //GameObject newBolt = 
+                Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
             //newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
             GetComponent<AudioSource>().Play();
             

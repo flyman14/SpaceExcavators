@@ -24,6 +24,7 @@ public class Destructable : MonoBehaviour {
 
     public void DoDamage(float damage)
     {
+        //Debug.Log("Try damage");
         if (shield > 0)
         {
             //If shields are strong enough to absorb impact.
@@ -45,6 +46,7 @@ public class Destructable : MonoBehaviour {
 
         if (health <= 0)
         {
+            //Debug.Log("Die");
             Die();
         }
         
