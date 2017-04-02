@@ -29,4 +29,21 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void FixedUpdate()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (moveVertical > 0)
+        {
+            body.AddForce(transform.forward * thrustSpeed * moveVertical);
+        }
+        else
+        {
+            body.AddForce(transform.forward * stopSpeed * moveVertical);
+        }
+        transform.Rotate(0, moveHorizontal * turnSpeed, 0);
+
+    }
 }
