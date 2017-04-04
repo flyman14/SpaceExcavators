@@ -12,6 +12,8 @@ public class Destructable : MonoBehaviour {
     //Max shield points.
     public float maxShield;
 
+    public GameObject deathFX;
+
     // Use this for initialization
     void Start () {
 		
@@ -54,6 +56,7 @@ public class Destructable : MonoBehaviour {
 
     void Die()
     {
+        Instantiate(deathFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

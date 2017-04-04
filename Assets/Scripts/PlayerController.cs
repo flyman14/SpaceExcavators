@@ -68,12 +68,14 @@ public class PlayerController : MonoBehaviour {
             //    }
             //}
         }
+        
     }
 
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        
         Rigidbody body = GetComponent<Rigidbody>();
         if (moveVertical > 0)
         {
@@ -88,67 +90,8 @@ public class PlayerController : MonoBehaviour {
     }
 }
 
-class Inventory
-{
-    Item[] items = new Item[maxItems];
-    Image[] itemImages = new Image[maxItems];
-    int currency = 0;
 
-    const int maxItems = 6;
 
-    public bool AddItem(Item newItem)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i] == null)
-            {
-                items[i] = newItem;
-                itemImages[i].sprite = newItem.sprite;
-                itemImages[i].enabled = true;
-                return true;
-            }
-        }
 
-        return false;
-    }
-
-    public bool RemoveItem(Item itemToRemove)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i] == itemToRemove)
-            {
-                items[i] = null;
-                itemImages[i].sprite = null;
-                itemImages[i].enabled = false;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void AddCurrency(int extraCurrency)
-    {
-        currency += extraCurrency;
-    }
-
-    public bool RemoveCurrency(int debit)
-    {
-        if (currency - debit >= 0)
-        {
-            currency -= debit;
-            return true;
-        }
-        return false;
-    }
-}
-
-class Item
-{
-    public Sprite sprite;
-    public string name;
-    public int value;
-}
 
 

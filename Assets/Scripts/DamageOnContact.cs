@@ -16,7 +16,8 @@ public class DamageOnContact : MonoBehaviour {
             //Debug.Log("Do damage");
             DObject.DoDamage(damage);
         }
-        //else Debug.Log("DObject null");
+        
+        //if object should destroy itself on contact (eg. bolts).
         if (destroyOnContact)
             Destroy(gameObject);
     }
