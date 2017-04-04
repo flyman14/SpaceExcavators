@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the player object.
@@ -21,10 +22,27 @@ public class PlayerController : MonoBehaviour {
     //Empty GameObject used for the spawn location of shots.
     public Transform shotSpawn;
 
+    public static PlayerController player;
+
     private float nextFire;
 
-	// Use this for initialization
-	void Start () {
+    //Make player persistant through scenes.
+    private void Awake()
+    {
+        if (player == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            player = this;
+        }
+        else if (player != this)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
+    // Use this for initialization
+    void Start () {
         nextFire = 0;
 	}
 	
@@ -69,3 +87,68 @@ public class PlayerController : MonoBehaviour {
 
     }
 }
+
+class Inventory
+{
+    Item[] items = new Item[maxItems];
+    Image[] itemImages = new Image[maxItems];
+    int currency = 0;
+
+    const int maxItems = 6;
+
+    public bool AddItem(Item newItem)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+            {
+                items[i] = newItem;
+                itemImages[i].sprite = newItem.sprite;
+                itemImages[i].enabled = true;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool RemoveItem(Item itemToRemove)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == itemToRemove)
+            {
+                items[i] = null;
+                itemImages[i].sprite = null;
+                itemImages[i].enabled = false;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void AddCurrency(int extraCurrency)
+    {
+        currency += extraCurrency;
+    }
+
+    public bool RemoveCurrency(int debit)
+    {
+        if (currency - debit >= 0)
+        {
+            currency -= debit;
+            return true;
+        }
+        return false;
+    }
+}
+
+class Item
+{
+    public Sprite sprite;
+    public string name;
+    public int value;
+}
+
+
