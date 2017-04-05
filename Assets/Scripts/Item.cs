@@ -2,8 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Item : ScriptableObject {
+public class Item : MonoBehaviour {
     public Sprite sprite;
-    public GameObject itemObject;
+    public int value;
+    public string itemName;
+    //public GameObject thisGameObject;
+
+    public bool consumed = false;
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && !consumed)
+        {
+            Inventory inventory = other.gameObject.GetComponent<Inventory>();
+            if (inventory != null)
+            {
+                if (inventory.AddItem(this))
+                {
+                    consumed = true;
+                    gameObject.SetActive(false);
+                }
+            } else
+            {
+                Debug.Log("Error: Player inventory null.");
+            }
+        }
+    }
+
+    
 }

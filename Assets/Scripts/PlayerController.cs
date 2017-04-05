@@ -21,8 +21,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject shot;
     //Empty GameObject used for the spawn location of shots.
     public Transform shotSpawn;
+    public Transform dropSpawn;
 
-    public static PlayerController player;
+    public static GameObject player;
 
     private float nextFire;
 
@@ -32,9 +33,9 @@ public class PlayerController : MonoBehaviour {
         if (player == null)
         {
             DontDestroyOnLoad(gameObject);
-            player = this;
+            player = gameObject;
         }
-        else if (player != this)
+        else if (player != gameObject)
         {
             Destroy(gameObject);
         }

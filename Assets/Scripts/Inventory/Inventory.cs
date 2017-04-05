@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
 {
     public Item[] items = new Item[numItemSlots];
     public Image[] itemImages = new Image[numItemSlots];
+    public Text[] itemNames = new Text[numItemSlots];
+
     int currency = 0;
 
     public const int numItemSlots = 6;
@@ -26,6 +28,8 @@ public class Inventory : MonoBehaviour
                 items[i] = itemToAdd;
                 itemImages[i].sprite = itemToAdd.sprite;
                 itemImages[i].enabled = true;
+                itemNames[i].text = itemToAdd.itemName;
+                itemNames[i].enabled = true;
                 return true;
             }
         }
@@ -48,10 +52,33 @@ public class Inventory : MonoBehaviour
                 items[i] = null;
                 itemImages[i].sprite = null;
                 itemImages[i].enabled = false;
+                itemNames[i].text = "";
+                itemNames[i].enabled = false;
                 return true;
             }
         }
 
+        return false;
+    }
+
+    /// <summary>
+    /// Removes an item from the inventory.
+    /// </summary>
+    /// <param name="index">Index of the item.</param>
+    /// <returns>Returns true if item was removed from inventory.
+    /// Returns false if item does not exist.</returns>
+    public bool RemoveItem(int index)
+    {
+        if (items[index] != null)
+        {
+            items[index] = null;
+            itemImages[index].sprite = null;
+            itemImages[index].enabled = false;
+            itemNames[index].text = "";
+            itemNames[index].enabled = false;
+            return true;
+        }
+        
         return false;
     }
 
