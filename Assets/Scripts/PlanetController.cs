@@ -10,6 +10,8 @@ public class PlanetController : MonoBehaviour {
     //public Canvas openShopTextCanvas;
     public GameObject shopText;
 
+    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -46,6 +48,7 @@ public class PlanetController : MonoBehaviour {
                 {
                     shopCanvas.enabled = !shopCanvas.enabled;
                     keyReleaseShop = false;
+                    ShopController.shopController.UpdateUI();
                 }
 
             }

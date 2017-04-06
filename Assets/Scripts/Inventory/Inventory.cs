@@ -89,6 +89,7 @@ public class Inventory : MonoBehaviour
     public void AddCurrency(int extraCurrency)
     {
         currency += extraCurrency;
+        //Debug.Log("Currency: " + currency);
     }
 
     public bool RemoveCurrency(int debit)
@@ -99,6 +100,50 @@ public class Inventory : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Returns the number of the specified item currently in the inventory.
+    /// </summary>
+    /// <param name="itemName">The name of the item. Eg. Gold</param>
+    /// <returns>The number of specified items in inventory.</returns>
+    public int GetItemCount(string itemName)
+    {
+        //Debug.Log("Counting items of itemName: " + itemName);
+        int count = 0;
+        foreach (Item item in items)
+        {
+            if (item != null)
+            {
+                //Debug.Log("Item has name: " + item.itemName);
+            }
+            if (item != null && item.itemName == itemName)
+            {
+                count++;
+            }
+        }
+        //Debug.Log("Found " + count + " items.");
+        return count;
+    }
+
+    /// <summary>
+    /// Removes all items in the inventory with itemName.
+    /// </summary>
+    /// <param name="itemName"></param>
+    public void RemoveItemsOfType(string itemName)
+    {
+        foreach (Item item in items)
+        {
+            if (item != null && item.itemName == itemName)
+            {
+                RemoveItem(item);
+            }
+        }
+    }
+
+    public int GetCurrency()
+    {
+        return currency;
     }
 }
 

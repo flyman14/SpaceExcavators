@@ -29,5 +29,10 @@ public class Item : MonoBehaviour {
         }
     }
 
+    public void SellMineral()
+    {
+
+    }
+
     
 }
