@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     public static GameObject player;
 
     private float nextFire;
+    public static Canvas inventoryCanvas;
+    bool keyReleaseInventory = true;
 
     //Make player persistant through scenes.
     private void Awake()
@@ -34,6 +36,11 @@ public class PlayerController : MonoBehaviour {
         {
             DontDestroyOnLoad(gameObject);
             player = gameObject;
+            if (inventoryCanvas == null)
+            {
+                inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
+            }
+
         }
         else if (player != gameObject)
         {
@@ -69,7 +76,20 @@ public class PlayerController : MonoBehaviour {
             //    }
             //}
         }
-        
+        if (Input.GetButton("Inventory"))
+        {
+            if (keyReleaseInventory)
+            {
+                inventoryCanvas.enabled = !inventoryCanvas.enabled;
+                keyReleaseInventory = false;
+            }
+
+        }
+        else
+        {
+            keyReleaseInventory = true;
+        }
+
     }
 
     void FixedUpdate()
