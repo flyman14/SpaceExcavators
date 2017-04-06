@@ -6,13 +6,15 @@ public class PlanetController : MonoBehaviour {
     bool canOpenShop = false;
     bool keyReleaseShop = true;
 
-    public static Canvas shopCanvas;
+    public Canvas shopCanvas;
+    public Canvas openShopTextCanvas;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             canOpenShop = true;
+            openShopTextCanvas.enabled = true;
         }
         
     }
@@ -26,6 +28,7 @@ public class PlanetController : MonoBehaviour {
             {
                 shopCanvas.enabled = false;
             }
+            openShopTextCanvas.enabled = false;
         }
         
     }

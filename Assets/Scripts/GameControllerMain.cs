@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class GameControllerMain : MonoBehaviour {
     public static Canvas inventoryCanvas;
+    public static Canvas shopCanvas;
 
     bool keyReleaseInventory = true;
+    bool keyReleaseShop = true;
 
 	// Use this for initialization
 	void Start () {
         if (inventoryCanvas == null)
         {
             inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
+        }
+        if (shopCanvas == null)
+        {
+            shopCanvas = GameObject.Find("ShopCanvas").GetComponent<Canvas>();
         }
 	}
 	
@@ -31,5 +37,19 @@ public class GameControllerMain : MonoBehaviour {
         {
             keyReleaseInventory = true;
         }
+
+        //if (Input.GetButton("ShopToggle"))
+        //{
+        //    if (keyReleaseShop)
+        //    {
+        //        shopCanvas.enabled = !shopCanvas.enabled;
+        //        keyReleaseShop = false;
+        //    }
+
+        //}
+        //else
+        //{
+        //    keyReleaseShop = true;
+        //}
     }
 }
