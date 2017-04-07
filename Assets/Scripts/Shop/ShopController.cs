@@ -18,6 +18,9 @@ public class ShopController : MonoBehaviour {
     const int NAME_TEXT_INDEX = 1;
     const int VALUE_TEXT_INDEX = 2;
     const int CARGO_TEXT_INDEX = 3;
+
+    const int REPAIR_PRICE = 2;
+    const int REFUEL_PRICE = 1;
     
     private void Awake()
     {
@@ -55,7 +58,7 @@ public class ShopController : MonoBehaviour {
         creditsText.text = playerInventory.GetCurrency() + "";
         shieldText.text = PlayerController.player.GetComponent<Destructable>().shield + "";
         hullText.text = PlayerController.player.GetComponent<Destructable>().health + "";
-        //fuelText.text = PlayerController.
+        fuelText.text = (int)(PlayerController.player.GetComponent<PlayerController>().fuel) + "";
     }
 
     
@@ -101,5 +104,63 @@ public class ShopController : MonoBehaviour {
 
         UpdateUI();
         HUD_Controller.hudController.UpdateUI();
+    }
+
+    /// <summary>
+    /// In progress.
+    /// </summary>
+    public void SellAllMinerals()
+    {
+        SellMinerals(0);
+    }
+
+    public void Repair()
+    {
+        Destructable playerDes = PlayerController.player.GetComponent<Destructable>();
+        float canHeal = playerDes.maxHealth - playerDes.health;
+        if (canHeal > 0)
+        {
+            Inventory playerInv = playerDes.GetComponent<Inventory>();
+            int price = (int)canHeal * REPAIR_PRICE;
+            if (playerInv.GetCurrency() > price)
+            {
+                playerInv.RemoveCurrency((int)canHeal * REPAIR_PRICE);
+                playerDes.health = playerDes.maxHealth;
+            }
+            else
+            {
+                int payable = price - playerInv.GetCurrency();
+                playerDes.health += payable / REPAIR_PRICE;
+                playerInv.RemoveCurrency(payable);
+            }
+            UpdateUI();
+            HUD_Controller.hudController.UpdateUI();
+            
+        }
+    }
+
+    public void Refuel()
+    {
+        PlayerController playerCon = PlayerController.player.GetComponent<PlayerController>();
+        float canFuel = playerCon.maxFuel - playerCon.fuel;
+        if (canFuel > 0)
+        {
+            Inventory playerInv = playerCon.GetComponent<Inventory>();
+            int price = (int)canFuel * REFUEL_PRICE;
+            if (playerInv.GetCurrency() > price)
+            {
+                playerInv.RemoveCurrency((int)canFuel * REFUEL_PRICE);
+                playerCon.fuel = playerCon.maxFuel;
+            }
+            else
+            {
+                int payable = price - playerInv.GetCurrency();
+                playerCon.fuel += payable / REFUEL_PRICE;
+                playerInv.RemoveCurrency(payable);
+            }
+            UpdateUI();
+            HUD_Controller.hudController.UpdateUI();
+
+        }
     }
 }

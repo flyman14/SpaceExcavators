@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActivationController : MonoBehaviour {
     public MeshRenderer[] renderers;
+    public MonoBehaviour[] behaviours;
 
     public void ToggleActivation(bool active)
     {
@@ -11,6 +12,11 @@ public class ActivationController : MonoBehaviour {
         foreach (MeshRenderer renderer in renderers)
         {
             renderer.enabled = active;
+        }
+
+        foreach (MonoBehaviour behaviour in behaviours)
+        {
+            behaviour.enabled = active;
         }
     }
 }

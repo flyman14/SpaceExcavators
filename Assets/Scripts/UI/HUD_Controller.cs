@@ -36,7 +36,7 @@ public class HUD_Controller : MonoBehaviour {
     {
         creditText.text = "CR " + PlayerController.player.GetComponent<Inventory>().GetCurrency();
         hullSlider.value = PlayerController.player.GetComponent<Destructable>().GetHealthPercent();
-        
+        fuelSlider.value = PlayerController.player.GetComponent<PlayerController>().fuel / PlayerController.player.GetComponent<PlayerController>().maxFuel;
         shieldSlider.value = PlayerController.player.GetComponent<Destructable>().GetShieldPercent();
     }
 }

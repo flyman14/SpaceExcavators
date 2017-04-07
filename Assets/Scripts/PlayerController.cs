@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour {
     public float turnSpeed;
     //Rate at which weapons can fire.
     public float fireRate;
-    
+    public float fuel;
+    public float maxFuel;
+    public float fuelConsumeRate;
 
     //The object spawned upon firing.
     public GameObject shot;
@@ -107,6 +109,15 @@ public class PlayerController : MonoBehaviour {
             body.AddForce(transform.forward * stopSpeed * moveVertical);
         }
         transform.Rotate(0, moveHorizontal * turnSpeed, 0);
+        if (moveHorizontal != 0 || moveVertical != 0)
+        {
+            fuel -= fuelConsumeRate * Time.deltaTime;
+            if (fuel <= 0)
+            {
+                GetComponent<Destructable>().Die();
+            }
+            HUD_Controller.hudController.UpdateUI();
+        }
 
     }
     

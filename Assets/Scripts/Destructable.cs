@@ -69,7 +69,7 @@ public class Destructable : MonoBehaviour {
         
     }
 
-    void Die()
+    public void Die()
     {
         SpawnItemOnDestroy spawner = GetComponent<SpawnItemOnDestroy>();
         if (spawner != null)
