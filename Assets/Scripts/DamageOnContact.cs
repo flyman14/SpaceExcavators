@@ -15,6 +15,10 @@ public class DamageOnContact : MonoBehaviour {
         {
             //Debug.Log("Do damage");
             DObject.DoDamage(damage);
+            if (other.tag == "Player")
+            {
+                HUD_Controller.hudController.UpdateUI();
+            }
         }
         
         //if object should destroy itself on contact (eg. bolts).

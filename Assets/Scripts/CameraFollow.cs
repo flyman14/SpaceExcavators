@@ -7,26 +7,22 @@ using UnityEngine;
 /// Target can move within the camera area a specified amount before starting to follow.
 /// </summary>
 public class CameraFollow : MonoBehaviour {
-    //Transform the camera is set to follow around.
+    public float dampTime = 0.15f;
+    private Vector3 velocity = Vector3.zero;
     public Transform target;
-    //Maximum distances the camera can travel in the x direction. 
-    public float xBoundary;
-    //Maximum distances the camera can travel in the z direction.
-    public float zBoundary;
-    // Maximum distance the target can move within the camera area without moving the camera in the x direction.
-    public float xBounce;
-    // Maximum distance the target can move within the camera area without moving the camera in the z direction.
-    public float yBounce;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (target)
+        {
+            Vector3 point = GetComponent<Camera>().WorldToViewportPoint(target.position);
+            Vector3 delta = target.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
+            Vector3 destination = transform.position + delta;
+            transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
+        }
 
-    
+    }
+
+
 }

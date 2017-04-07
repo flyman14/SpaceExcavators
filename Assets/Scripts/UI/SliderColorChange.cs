@@ -13,6 +13,14 @@ public class SliderColorChange : MonoBehaviour {
     public void UpdateColor()
     {
         fillArea.color = Color.Lerp(MinHealthColor, MaxHealthColor, slider.value / slider.maxValue);
+        if (slider.value <= 0)
+        {
+            fillArea.enabled = false;
+        }
+        else
+        {
+            fillArea.enabled = true;
+        }
     }
 
 

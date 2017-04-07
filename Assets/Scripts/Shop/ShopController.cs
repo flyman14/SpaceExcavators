@@ -100,5 +100,6 @@ public class ShopController : MonoBehaviour {
         //Debug.Log("numMinerals: " + numMinerals);
 
         UpdateUI();
+        HUD_Controller.hudController.UpdateUI();
     }
 }

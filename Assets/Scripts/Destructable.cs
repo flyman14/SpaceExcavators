@@ -59,4 +59,14 @@ public class Destructable : MonoBehaviour {
         Instantiate(deathFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+
+    public float GetHealthPercent()
+    {
+        return health / maxHealth;
+    }
+
+    public float GetShieldPercent()
+    {
+        return shield / maxShield;
+    }
 }
