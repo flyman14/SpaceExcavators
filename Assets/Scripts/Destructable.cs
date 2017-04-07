@@ -12,6 +12,11 @@ public class Destructable : MonoBehaviour {
     //Max shield points.
     public float maxShield;
 
+    public float shieldRegen;
+    public float regenDelay;
+
+    float timeToRegen = 0;
+
     public GameObject deathFX;
 
     // Use this for initialization
@@ -21,7 +26,15 @@ public class Destructable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (timeToRegen <= 0 && shield < maxShield)
+        {
+            shield = Mathf.Clamp(shield + shieldRegen * Time.deltaTime, 0, maxShield);
+            HUD_Controller.hudController.UpdateUI();
+        }
+        else
+        {
+            timeToRegen -= Time.deltaTime;
+        }
 	}
 
     public void DoDamage(float damage)
@@ -45,6 +58,8 @@ public class Destructable : MonoBehaviour {
         {
             health -= damage;
         }
+
+        timeToRegen = regenDelay;
 
         if (health <= 0)
         {
