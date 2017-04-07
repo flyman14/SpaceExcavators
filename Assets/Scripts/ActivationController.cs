@@ -7,6 +7,7 @@ public class ActivationController : MonoBehaviour {
 
     public void ToggleActivation(bool active)
     {
+        Debug.Log("Toggling activation");
         foreach (MeshRenderer renderer in renderers)
         {
             renderer.enabled = active;

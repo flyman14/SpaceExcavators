@@ -10,7 +10,11 @@ public class PlanetController : MonoBehaviour {
     //public Canvas openShopTextCanvas;
     public GameObject shopText;
 
-    
+    private void Start()
+    {
+        shopCanvas = ShopController.shopController.GetComponent<Canvas>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +23,10 @@ public class PlanetController : MonoBehaviour {
             canOpenShop = true;
             //openShopTextCanvas.enabled = true;
             shopText.SetActive(true);
+        }
+        if (other.tag == "MainCamera")
+        {
+            Debug.Log("WTF is happening?");
         }
         
     }

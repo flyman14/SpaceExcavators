@@ -12,6 +12,7 @@ public class GameControllerMain : MonoBehaviour {
     public SpawnEntry[] spawnOptions;
     
     int[,] mapSpawnData = new int[mapCellWidth, mapCellHeight];
+    int totalWeight = 0;
     
 
 	// Use this for initialization
@@ -24,6 +25,12 @@ public class GameControllerMain : MonoBehaviour {
                 mapSpawnData[j, i] = -1;
             }
         }
+
+        foreach (SpawnEntry entry in spawnOptions)
+        {
+            totalWeight += entry.spawnRate;
+        }
+
         MakeMap();
         SpawnMap();
     }
@@ -34,13 +41,19 @@ public class GameControllerMain : MonoBehaviour {
         {
             for (int j = 0; j < mapCellWidth; j++)
             {
+                int randomChoice = Random.Range(0, totalWeight);
                 for (int z = 0; z < spawnOptions.Length; z++)
                 {
-                    if (Random.value < spawnOptions[z].spawnRate)
+                    if (randomChoice < spawnOptions[z].spawnRate)
                     {
+                        if (spawnOptions[z].prefab == null)
+                        {
+                            break;
+                        }
                         mapSpawnData[j, i] = z;
                         break;
                     }
+                    randomChoice -= spawnOptions[z].spawnRate;
                 }
                 
             }
@@ -87,5 +100,5 @@ enum SpawnType
 public struct SpawnEntry
 {
     public GameObject prefab;
-    public float spawnRate;
+    public int spawnRate;
 }

@@ -11,6 +11,26 @@ public class ActivationToggler : MonoBehaviour
         {
             ac.ToggleActivation(true);
         }
+        else
+        {
+            Debug.Log("Object with tag: " + other.tag + " has no AC.");
+            
+        }
+        Debug.Log("OnTriggerEnter owner: " + tag);
+        Debug.Log("OnTriggerEnter other collider owner: " + other.tag);
+        //else
+        //{
+        //    Debug.Log("Wat is happenin?");
+        //}
+        //ac = GetComponent<ActivationController>();
+        //if (ac != null)
+        //{
+        //    ac.ToggleActivation(true);
+        //}
+        //if (tag == "Planet")
+        //{
+        //    Debug.Log("Planet activation");
+        //}
     }
 
     private void OnTriggerExit(Collider other)
@@ -20,5 +40,10 @@ public class ActivationToggler : MonoBehaviour
         {
             ac.ToggleActivation(false);
         }
+        //ac = GetComponent<ActivationController>();
+        //if (ac != null)
+        //{
+        //    ac.ToggleActivation(false);
+        //}
     }
 }
