@@ -26,7 +26,7 @@ public class PlanetController : MonoBehaviour {
         }
         if (other.tag == "MainCamera")
         {
-            Debug.Log("WTF is happening?");
+            //Debug.Log("WTF is happening?");
         }
         
     }

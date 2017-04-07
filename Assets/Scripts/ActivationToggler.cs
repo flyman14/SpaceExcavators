@@ -13,11 +13,11 @@ public class ActivationToggler : MonoBehaviour
         }
         else
         {
-            Debug.Log("Object with tag: " + other.tag + " has no AC.");
+            //Debug.Log("Object with tag: " + other.tag + " has no AC.");
             
         }
-        Debug.Log("OnTriggerEnter owner: " + tag);
-        Debug.Log("OnTriggerEnter other collider owner: " + other.tag);
+        //Debug.Log("OnTriggerEnter owner: " + tag);
+        //Debug.Log("OnTriggerEnter other collider owner: " + other.tag);
         //else
         //{
         //    Debug.Log("Wat is happenin?");

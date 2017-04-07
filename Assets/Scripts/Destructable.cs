@@ -71,6 +71,11 @@ public class Destructable : MonoBehaviour {
 
     void Die()
     {
+        SpawnItemOnDestroy spawner = GetComponent<SpawnItemOnDestroy>();
+        if (spawner != null)
+        {
+            spawner.Spawn();
+        }
         Instantiate(deathFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
