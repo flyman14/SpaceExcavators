@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
     public float maxFuel;
     public float fuelConsumeRate;
 
+    public bool doubleShotUpgrade = false;
+    const float doubleShotSpacing = 0.2f;
+
     //The object spawned upon firing.
     public GameObject shot;
     //Empty GameObject used for the spawn location of shots.
@@ -63,7 +66,17 @@ public class PlayerController : MonoBehaviour {
         {
             nextFire = Time.time + fireRate;
             //GameObject newBolt = 
+            if (doubleShotUpgrade)
+            {
+                Vector3 offset = shotSpawn.right * doubleShotSpacing;
+                Instantiate(shot, shotSpawn.position + offset, shotSpawn.rotation);
+                Instantiate(shot, shotSpawn.position - offset, shotSpawn.rotation);
+            }
+            else
+            {
                 Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            }
+                
             //newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
             GetComponent<AudioSource>().Play();
             

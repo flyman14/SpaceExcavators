@@ -10,20 +10,26 @@ public class InventoryEditor : Editor
     private SerializedProperty itemImagesProperty;
     private SerializedProperty itemsProperty;
     private SerializedProperty itemNamesProperty;
+    private SerializedProperty currencyProperty;
     private const string inventoryPropItemImagesName = "itemImages";
     private const string inventoryPropItemsName = "items";
     private const string inventoryPropItemNamesName = "itemNames";
+    private const string inventoryPropCurrencyName = "currency";
 
     private void OnEnable()
     {
         itemImagesProperty = serializedObject.FindProperty(inventoryPropItemImagesName);
         itemsProperty = serializedObject.FindProperty(inventoryPropItemsName);
         itemNamesProperty = serializedObject.FindProperty(inventoryPropItemNamesName);
+        currencyProperty = serializedObject.FindProperty(inventoryPropCurrencyName);
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        EditorGUILayout.PropertyField(currencyProperty);
+        EditorGUILayout.EndVertical();
         for (int i = 0; i < Inventory.numItemSlots; i++)
         {
             ItemSlotGUI(i);

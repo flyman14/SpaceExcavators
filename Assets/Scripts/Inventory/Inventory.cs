@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public Image[] itemImages = new Image[numItemSlots];
     public Text[] itemNames = new Text[numItemSlots];
 
-    int currency = 0;
+    public int currency = 0;
 
     public const int numItemSlots = 6;
 

@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour {
     public Transform sellListPanel;
+    public Transform upgradeListPanel;
     public Text creditsText;
     public Text shieldText;
     public Text fuelText;
     public Text hullText;
+
+    public GameObject upgradedShotPrefab;
 
     //public GameObject mineralSlotPrefab;
     Inventory playerInventory;
@@ -18,6 +21,11 @@ public class ShopController : MonoBehaviour {
     const int NAME_TEXT_INDEX = 1;
     const int VALUE_TEXT_INDEX = 2;
     const int CARGO_TEXT_INDEX = 3;
+
+    const int UPGRADE_BUTTON_INDEX = 3;
+    const int UPGRADE_PRICE_INDEX = 2;
+
+    const float SPEED_UPGRADE_AMOUNT = 1.5f;
 
     const int REPAIR_PRICE = 2;
     const int REFUEL_PRICE = 1;
@@ -93,7 +101,7 @@ public class ShopController : MonoBehaviour {
 
         int mineralValue;
         string mineralString = sellListPanel.GetChild(index).GetChild(VALUE_TEXT_INDEX).GetComponent<Text>().text;
-        mineralString = mineralString.Substring(0, mineralString.Length - mineralString.IndexOf(' '));
+        mineralString = mineralString.Substring(0, mineralString.Length - (mineralString.Length - mineralString.IndexOf(' ')));
         Int32.TryParse(mineralString, out mineralValue);
 
         playerInventory.RemoveItemsOfType(sellListPanel.GetChild(index).GetChild(NAME_TEXT_INDEX).GetComponent<Text>().text);
@@ -161,6 +169,63 @@ public class ShopController : MonoBehaviour {
             UpdateUI();
             HUD_Controller.hudController.UpdateUI();
 
+        }
+    }
+
+    public void Upgrade(int index)
+    {
+        PlayerController playerCon = PlayerController.player.GetComponent<PlayerController>();
+        Inventory playerInv = playerCon.GetComponent<Inventory>();
+
+        if (playerCon == null || playerInv == null)
+        {
+            Debug.Log("Error: player controller or inventory null");
+            return;
+        }
+
+        string priceString = upgradeListPanel.GetChild(index).GetChild(UPGRADE_PRICE_INDEX).GetComponent<Text>().text;
+        priceString = priceString.Substring(0, priceString.Length - (priceString.Length - priceString.IndexOf(' ')));
+        int priceValue = 0;
+        if (!Int32.TryParse(priceString, out priceValue))
+        {
+            Debug.Log("Error in parsing upgrade price.");
+            return;
+        }
+
+        if (playerInv.GetCurrency() >= priceValue)
+        {
+            Destructable playerDes = playerCon.GetComponent<Destructable>();
+            switch (index)
+            {
+                case 0:
+                    playerCon.shot = upgradedShotPrefab;
+                    break;
+                case 1:
+                    playerCon.doubleShotUpgrade = true;
+                    break;
+                case 2:
+                    playerDes.maxShield *= 2;
+                    playerDes.shield = playerDes.maxShield;
+                    break;
+                case 3:
+                    playerDes.maxHealth *= 2;
+                    playerDes.health = playerDes.maxHealth;
+                    break;
+                case 4:
+                    playerCon.thrustSpeed *= SPEED_UPGRADE_AMOUNT;
+                    playerCon.stopSpeed *= SPEED_UPGRADE_AMOUNT;
+                    playerCon.turnSpeed *= SPEED_UPGRADE_AMOUNT;
+                    break;
+                default:
+                    Debug.Log("Error: Upgrade given invalid index value.");
+                    return;
+            }
+
+            playerInventory.RemoveCurrency(priceValue);
+            upgradeListPanel.GetChild(index).GetChild(UPGRADE_BUTTON_INDEX).GetComponent<Button>().enabled = false;
+            UpdateUI();
+            HUD_Controller.hudController.UpdateUI();
+            
         }
     }
 }
