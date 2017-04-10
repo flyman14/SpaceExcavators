@@ -21,12 +21,26 @@ public class Inventory : MonoBehaviour
     /// Returns false if item could not be added.</returns>
     public bool AddItem(Item itemToAdd)
     {
+        if (itemToAdd == null)
+        {
+            Debug.Log("Error: itemToAdd null.");
+            return false;
+        }
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] == null)
             {
                 items[i] = itemToAdd;
+                if (itemImages[i] == null)
+                {
+                    Debug.Log("Error: itemImages[i] null");
+                }
+                if (itemToAdd.sprite == null)
+                {
+                    Debug.Log("Error: itemToAdd.sprite null");
+                }
                 itemImages[i].sprite = itemToAdd.sprite;
+                
                 itemImages[i].enabled = true;
                 itemNames[i].text = itemToAdd.itemName;
                 itemNames[i].enabled = true;

@@ -22,6 +22,10 @@ public class Item : MonoBehaviour {
                     consumed = true;
                     gameObject.SetActive(false);
                 }
+                else
+                {
+                    Debug.Log("Error: Inventory.AddItem failed.");
+                }
             } else
             {
                 Debug.Log("Error: Player inventory null.");
