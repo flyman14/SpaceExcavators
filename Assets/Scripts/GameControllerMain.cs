@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameControllerMain : MonoBehaviour {
-    const int mapCellWidth = 100;
-    const int mapCellHeight = 100;
-    const float spaceBetweenUnits = 5f;
+    const int mapCellWidth = 300;
+    const int mapCellHeight = 300;
+    const float spaceBetweenUnits = 2f;
     const float activationCutoff = 800;
 
     public SpawnEntry[] spawnOptions;

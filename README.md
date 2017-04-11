@@ -2,7 +2,6 @@
 Game based on the 2003 "Asteroid Miner" by Positech Games.  
 To Do:
 Creation of more enemies
-Radar-style minimap
 BG music and more sounds
 Pause menu
 Main Menu
