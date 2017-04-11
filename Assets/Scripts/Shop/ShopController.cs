@@ -119,7 +119,13 @@ public class ShopController : MonoBehaviour {
     /// </summary>
     public void SellAllMinerals()
     {
+
         SellMinerals(0);
+        SellMinerals(1);
+        SellMinerals(2);
+        SellMinerals(3);
+        SellMinerals(4);
+        SellMinerals(5);
     }
 
     public void Repair()
@@ -223,6 +229,7 @@ public class ShopController : MonoBehaviour {
 
             playerInventory.RemoveCurrency(priceValue);
             upgradeListPanel.GetChild(index).GetChild(UPGRADE_BUTTON_INDEX).GetComponent<Button>().enabled = false;
+            upgradeListPanel.GetChild(index).GetComponent<Image>().color = Color.red;
             UpdateUI();
             HUD_Controller.hudController.UpdateUI();
             
