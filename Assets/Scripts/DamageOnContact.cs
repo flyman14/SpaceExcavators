@@ -20,9 +20,20 @@ public class DamageOnContact : MonoBehaviour {
                 HUD_Controller.hudController.UpdateUI();
             }
         }
-        
+
         //if object should destroy itself on contact (eg. bolts).
         if (destroyOnContact)
+        {
+            try
+            {
+                GetComponent<SpawnItemOnDestroy>().Spawn();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
             Destroy(gameObject);
+        }
     }
 }
