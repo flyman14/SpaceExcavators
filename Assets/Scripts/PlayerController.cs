@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     //Empty GameObject used for the spawn location of shots.
     public Transform shotSpawn;
     public Transform dropSpawn;
-
+    public GameObject jetObject;
     public static GameObject player;
 
     private float nextFire;
@@ -130,6 +130,11 @@ public class PlayerController : MonoBehaviour {
                 GetComponent<Destructable>().Die();
             }
             HUD_Controller.hudController.UpdateUI();
+            jetObject.SetActive(true);
+        }
+        else
+        {
+            jetObject.SetActive(false);
         }
 
     }
