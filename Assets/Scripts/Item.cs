@@ -24,7 +24,7 @@ public class Item : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Error: Inventory.AddItem failed.");
+                    //Debug.Log("Error: Inventory.AddItem failed.");
                 }
             } else
             {

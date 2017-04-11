@@ -5,7 +5,7 @@ using UnityEngine;
 public class DropItem : MonoBehaviour {
     public void Drop(int index)
     {
-        Debug.Log("Try to drop");
+        //Debug.Log("Try to drop");
         Inventory inventory = PlayerController.player.GetComponent<Inventory>();
         if (inventory == null)
         {
