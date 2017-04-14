@@ -11,6 +11,7 @@ public class EnemyShipController : MonoBehaviour {
     public float fireRate;
     public float visionAngle;
     public float visionDistance;
+    public float recoilForce;
 
     float timeToFire = 0;
 
@@ -37,6 +38,7 @@ public class EnemyShipController : MonoBehaviour {
         {
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
             timeToFire += fireRate;
+            agent.velocity -= (transform.forward * recoilForce * 2f);
         }
 
         timeToFire = Mathf.Clamp(timeToFire - Time.deltaTime, 0, fireRate);

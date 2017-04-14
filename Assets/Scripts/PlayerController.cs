@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     public float fuel;
     public float maxFuel;
     public float fuelConsumeRate;
+    public float recoilForce;
 
     public bool doubleShotUpgrade = false;
     const float doubleShotSpacing = 0.2f;
@@ -77,10 +78,12 @@ public class PlayerController : MonoBehaviour {
                 Vector3 offset = shotSpawn.right * doubleShotSpacing;
                 Instantiate(shot, shotSpawn.position + offset, shotSpawn.rotation);
                 Instantiate(shot, shotSpawn.position - offset, shotSpawn.rotation);
+                GetComponent<Rigidbody>().AddForce(transform.forward * -recoilForce * 2f);
             }
             else
             {
                 Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+                GetComponent<Rigidbody>().AddForce(transform.forward * -recoilForce);
             }
                 
             //newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
