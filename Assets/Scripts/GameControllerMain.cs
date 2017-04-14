@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameControllerMain : MonoBehaviour {
-    const int mapCellWidth = 300;
-    const int mapCellHeight = 300;
+    const int mapCellWidth = 200;
+    const int mapCellHeight = 200;
     const float spaceBetweenUnits = 2f;
     const float activationCutoff = 800;
 
