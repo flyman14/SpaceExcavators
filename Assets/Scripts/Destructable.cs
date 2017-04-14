@@ -18,14 +18,10 @@ public class Destructable : MonoBehaviour {
     float timeToRegen = 0;
 
     public GameObject deathFX;
-
-    // Use this for initialization
-    void Start () {
-		
-	}
+    
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         if (timeToRegen <= 0 && shield < maxShield)
         {
             shield = Mathf.Clamp(shield + shieldRegen * Time.deltaTime, 0, maxShield);
@@ -37,7 +33,7 @@ public class Destructable : MonoBehaviour {
         }
 	}
 
-    public void DoDamage(float damage)
+    public virtual void DoDamage(float damage)
     {
         //Debug.Log("Try damage");
         if (shield > 0)

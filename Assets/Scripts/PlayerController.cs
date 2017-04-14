@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     public Transform shotSpawn;
     public Transform dropSpawn;
     public GameObject jetObject;
+    public Image bloodSplatterImage;
     public static GameObject player;
 
     private float nextFire;
