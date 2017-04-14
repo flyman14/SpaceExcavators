@@ -37,21 +37,27 @@ public class PlayerController : MonoBehaviour {
     //Make player persistant through scenes.
     private void Awake()
     {
-        if (player == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            player = gameObject;
-            if (inventoryCanvas == null)
-            {
-                inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
-            }
 
-        }
-        else if (player != gameObject)
-        {
-            Destroy(gameObject);
-        }
-        
+        //NOT YET IMPLEMENTED
+        //if (player == null)
+        //{
+        //    //DontDestroyOnLoad(gameObject);
+        //    player = gameObject;
+        //    if (inventoryCanvas == null)
+        //    {
+        //        inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
+        //    }
+
+        //}
+        //else if (player != gameObject)
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        //For debug
+        player = gameObject;
+        inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
+
     }
 
     // Use this for initialization

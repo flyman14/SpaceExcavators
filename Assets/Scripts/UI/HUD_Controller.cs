@@ -13,17 +13,17 @@ public class HUD_Controller : MonoBehaviour {
 
     private void Awake()
     {
-        if (hudController == null)
-        {
-            hudController = this;
+        //if (hudController == null)
+        //{
+        //    hudController = this;
             
-        }
-        else if (hudController != this)
-        {
-            Destroy(gameObject);
-        }
+        //}
+        //else if (hudController != this)
+        //{
+        //    Destroy(gameObject);
+        //}
 
-        
+        hudController = this;
     }
 
     private void Start()
