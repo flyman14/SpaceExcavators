@@ -22,6 +22,6 @@ public class PlayerDestructable : Destructable {
         base.DoDamage(damage);
         timeToDisappear = bloodDisappearTime;
         bloodSplatterImage.color = Color.white;
-        Debug.Log("PlayerDestructable doDamage");
+        //Debug.Log("PlayerDestructable doDamage");
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 /// <summary>
 /// Controls the player object.
 /// </summary>
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     //Forward thrust speed.
     public float thrustSpeed;
     //Deceleration speed.
@@ -25,16 +26,21 @@ public class PlayerController : MonoBehaviour {
 
     //The object spawned upon firing.
     public GameObject shot;
+
+    public GameObject missileShot;
     //Empty GameObject used for the spawn location of shots.
     public Transform shotSpawn;
     public Transform dropSpawn;
     public GameObject jetObject;
-    public Image bloodSplatterImage;
+
     public static GameObject player;
 
     private float nextFire;
     public static Canvas inventoryCanvas;
     bool keyReleaseInventory = true;
+
+    public int missileStock;
+    public int maxMissiles;
 
     //Make player persistant through scenes.
     private void Awake()
@@ -63,12 +69,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         nextFire = 0;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
@@ -86,21 +93,29 @@ public class PlayerController : MonoBehaviour {
                 Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
                 GetComponent<Rigidbody>().AddForce(transform.forward * -recoilForce);
             }
-                
+
             //newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
             GetComponent<AudioSource>().Play();
-            
-            //if (bonusShots > 0)
-            //{
-            //    for (int i = 1; i <= bonusShots; i++)
-            //    {
-            //        newBolt = (GameObject)Instantiate(shot, shotSpawn.position + Vector3.left * i * shotSpread, shotSpawn.rotation);
-            //        newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
-            //        newBolt = (GameObject)Instantiate(shot, shotSpawn.position + Vector3.right * i * shotSpread, shotSpawn.rotation);
-            //        newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
-            //    }
-            //}
+
+
         }
+
+        if (Input.GetButton("Fire2") && Time.time > nextFire && missileStock > 0)
+        {
+            nextFire = Time.time + fireRate;
+            //GameObject newBolt = 
+
+
+            Instantiate(missileShot, shotSpawn.position + transform.forward*1, shotSpawn.rotation);
+            GetComponent<Rigidbody>().AddForce(transform.forward * -recoilForce);
+
+
+            //newBolt.GetComponent<Done_Homer>().turnSpeed = bonusHoming;
+            GetComponent<AudioSource>().Play();
+            missileStock--;
+
+        }
+
         if (Input.GetButton("Inventory"))
         {
             if (keyReleaseInventory)
@@ -121,7 +136,7 @@ public class PlayerController : MonoBehaviour {
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        
+
         Rigidbody body = GetComponent<Rigidbody>();
         if (moveVertical > 0)
         {
@@ -148,7 +163,7 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-    
+
 }
 
 

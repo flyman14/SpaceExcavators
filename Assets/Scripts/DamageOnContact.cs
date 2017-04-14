@@ -5,10 +5,23 @@ using UnityEngine;
 public class DamageOnContact : MonoBehaviour {
     public float damage;
     public bool destroyOnContact;
+    public float maxDistance;
 
 
     void OnTriggerEnter(Collider other)
     {
+        //Make sure the collision is within max allowable distance.
+        if (maxDistance != 0 && (other.ClosestPoint(transform.position) - transform.position).sqrMagnitude >= maxDistance * maxDistance)
+        {
+            return;
+        }
+
+        ////Make sure the collision is within max allowable distance.
+        //if (maxDistance != 0 && (other.transform.position - transform.position).sqrMagnitude >= maxDistance * maxDistance)
+        //{
+        //    return;
+        //}
+
         //If object is destructable, do damage.
         Destructable DObject = other.gameObject.GetComponent<Destructable>();
         if (DObject != null)

@@ -11,6 +11,7 @@ public class ShopController : MonoBehaviour {
     public Text shieldText;
     public Text fuelText;
     public Text hullText;
+    public Text missilesText;
 
     public GameObject upgradedShotPrefab;
 
@@ -29,6 +30,7 @@ public class ShopController : MonoBehaviour {
 
     const int REPAIR_PRICE = 2;
     const int REFUEL_PRICE = 1;
+    const int MISSILE_PRICE = 50;
     
     private void Awake()
     {
@@ -67,6 +69,7 @@ public class ShopController : MonoBehaviour {
         shieldText.text = PlayerController.player.GetComponent<Destructable>().shield + "";
         hullText.text = PlayerController.player.GetComponent<Destructable>().health + "";
         fuelText.text = (int)(PlayerController.player.GetComponent<PlayerController>().fuel) + "";
+        missilesText.text = "Missiles: " + PlayerController.player.GetComponent<PlayerController>().missileStock;
     }
 
     
@@ -143,9 +146,9 @@ public class ShopController : MonoBehaviour {
             }
             else
             {
-                int payable = price - playerInv.GetCurrency();
+                int payable = playerInv.GetCurrency();
                 playerDes.health += payable / REPAIR_PRICE;
-                playerInv.RemoveCurrency(payable);
+                playerInv.RemoveCurrency(REPAIR_PRICE * (payable / REPAIR_PRICE));
             }
             UpdateUI();
             HUD_Controller.hudController.UpdateUI();
@@ -153,24 +156,50 @@ public class ShopController : MonoBehaviour {
         }
     }
 
+    public void RefillMissiles()
+    {
+        PlayerController playerCon = PlayerController.player.GetComponent<PlayerController>();
+        float canRefill = playerCon.maxMissiles - playerCon.missileStock;
+        if (canRefill > 0)
+        {
+            Inventory playerInv = playerCon.GetComponent<Inventory>();
+            int price = (int)canRefill * MISSILE_PRICE;
+            if (playerInv.GetCurrency() > price)
+            {
+                playerInv.RemoveCurrency((int)canRefill * MISSILE_PRICE);
+                playerCon.missileStock = playerCon.maxMissiles;
+            }
+            else
+            {
+                int payable = playerInv.GetCurrency();
+                playerCon.missileStock += payable / MISSILE_PRICE;
+                playerInv.RemoveCurrency(MISSILE_PRICE * (payable / MISSILE_PRICE));
+                
+            }
+            UpdateUI();
+            HUD_Controller.hudController.UpdateUI();
+
+        }
+    }
+
     public void Refuel()
     {
         PlayerController playerCon = PlayerController.player.GetComponent<PlayerController>();
-        float canFuel = playerCon.maxFuel - playerCon.fuel;
-        if (canFuel > 0)
+        float canRefill = playerCon.maxFuel - playerCon.fuel;
+        if (canRefill > 0)
         {
             Inventory playerInv = playerCon.GetComponent<Inventory>();
-            int price = (int)canFuel * REFUEL_PRICE;
+            int price = (int)canRefill * REFUEL_PRICE;
             if (playerInv.GetCurrency() > price)
             {
-                playerInv.RemoveCurrency((int)canFuel * REFUEL_PRICE);
+                playerInv.RemoveCurrency((int)canRefill * REFUEL_PRICE);
                 playerCon.fuel = playerCon.maxFuel;
             }
             else
             {
-                int payable = price - playerInv.GetCurrency();
+                int payable = playerInv.GetCurrency();
                 playerCon.fuel += payable / REFUEL_PRICE;
-                playerInv.RemoveCurrency(payable);
+                playerInv.RemoveCurrency(REFUEL_PRICE * (payable / REFUEL_PRICE));
             }
             UpdateUI();
             HUD_Controller.hudController.UpdateUI();
