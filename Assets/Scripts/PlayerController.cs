@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public int missileStock;
     public int maxMissiles;
+    public Canvas deathCanvas;
     //public Canvas inventoryCanvas;
 
     //Make player persistant through scenes.
@@ -165,6 +166,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        deathCanvas.enabled = true;
+    }
 }
 
 

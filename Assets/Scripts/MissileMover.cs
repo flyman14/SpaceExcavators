@@ -64,6 +64,10 @@ public class MissileMover : MonoBehaviour {
             //See if any nearby transforms are now within the COV.
             foreach (Transform item in nearbyTransforms)
             {
+                if (item == null)
+                {
+                    continue;
+                }
                 Vector3 direction = item.position - transform.position;
 
                 if (Vector3.Angle(direction, transform.forward) <= visionAngle)

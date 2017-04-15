@@ -28,7 +28,7 @@ public class DamageOnContact : MonoBehaviour {
         {
             //Debug.Log("Do damage");
             DObject.DoDamage(damage);
-            if (other.tag == "Player")
+            if (other.tag != null && other.tag == "Player")
             {
                 HUD_Controller.hudController.UpdateUI();
             }

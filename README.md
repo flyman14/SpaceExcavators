@@ -4,3 +4,4 @@ To Do:
 BG music and more sounds
 Performance optimizations
 'Sun' objects
+Fix enemy1
