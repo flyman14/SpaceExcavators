@@ -36,11 +36,12 @@ public class PlayerController : MonoBehaviour
     public static GameObject player;
 
     private float nextFire;
-    public static Canvas inventoryCanvas;
+    public Canvas inventoryCanvas;
     bool keyReleaseInventory = true;
 
     public int missileStock;
     public int maxMissiles;
+    //public Canvas inventoryCanvas;
 
     //Make player persistant through scenes.
     private void Awake()
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         //For debug
         player = gameObject;
-        inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
+        //inventoryCanvas = GameObject.Find("InventoryCanvas").GetComponent<Canvas>();
 
     }
 

@@ -6,6 +6,6 @@ public class CloseInventory : MonoBehaviour {
 
 	public void Close()
     {
-        PlayerController.inventoryCanvas.enabled = false;
+        PlayerController.player.GetComponent<PlayerController>().inventoryCanvas.enabled = false;
     }
 }
