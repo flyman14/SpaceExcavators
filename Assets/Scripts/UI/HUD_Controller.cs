@@ -8,6 +8,7 @@ public class HUD_Controller : MonoBehaviour {
     public Slider fuelSlider;
     public Slider shieldSlider;
     public Slider hullSlider;
+    public Text missilesText;
 
     public static HUD_Controller hudController;
 
@@ -38,5 +39,6 @@ public class HUD_Controller : MonoBehaviour {
         hullSlider.value = PlayerController.player.GetComponent<Destructable>().GetHealthPercent();
         fuelSlider.value = PlayerController.player.GetComponent<PlayerController>().fuel / PlayerController.player.GetComponent<PlayerController>().maxFuel;
         shieldSlider.value = PlayerController.player.GetComponent<Destructable>().GetShieldPercent();
+        missilesText.text = "Missiles: " + PlayerController.player.GetComponent<PlayerController>().missileStock;
     }
 }
