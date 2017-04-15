@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartMenuController : MonoBehaviour {
     const int NEW_GAME_SCENE_INDEX = 1;
 
+    public Canvas helpCanvas;
 
 	public void LoadNewGame()
     {
@@ -19,5 +20,10 @@ public class StartMenuController : MonoBehaviour {
 #else
         Application.Quit ();
 #endif
+    }
+
+    public void LoadHelp()
+    {
+        helpCanvas.enabled = true;
     }
 }
